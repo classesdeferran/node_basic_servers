@@ -4,17 +4,20 @@ const puerto = process.argv[2] || 0
 
 const server = http.createServer((req, res) => {
     
-    res.statusCode = 404;
     let body = ""
     let title = ""
-    if (res.statusCode === 200) {        
-        title = "Todo OK"
-        body = "<h1>Todo perfecto</h1>"
-        body += `<p>${req.url}</p>`
-
-    } else if (res.statusCode === 404) {
-        title = 'Error 404'
-        body = 'Página no encontrada'
+    if (req.url === "/") {        
+        title = "Pagina inicial"
+        body = "<h1>Página inicial</h1>"
+        body += `<p><a href="/node">Ir a la página NODE</a></p>`
+    } else if (req.url === "/node") {
+        title = "Pagina NODE"
+        body = "<h1>Página NODE</h1>"
+        body += `<p><a href="/">Ir a la página INICIAL</a></p>`
+    } else {
+        title = "Error 404"
+        body = "<h1>Página no encontrada</h1>"
+        body += `<p><a href="/">Ir a la página INICIAL</a></p>`
     }
     
     // esto funciona también
